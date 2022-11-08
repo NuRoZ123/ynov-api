@@ -5,5 +5,13 @@
   "main": "index.js",
   "repository": "https://github.com/NuRoZ123/ynov-api.git",
   "author": "NuRoZ",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "node": "node index.js",
+    "nodemon": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
