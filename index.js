@@ -5,7 +5,7 @@ import bodyParser from "koa-bodyparser";
 const app = new Koa();
 const router = new Router();
 
-let products = [
+let todos = [
     {
         id: 1,
         name: "Iphone"
@@ -21,33 +21,33 @@ let products = [
 ]
 
 router.get("/api/todos", (ctx, next) => {
-   ctx.body = products;
+   ctx.body = todos;
 });
 
 router.get("/api/todos/:id", (ctx, next) => {
-    ctx.body = products.find(p => parseInt(ctx.params.id) === p.id);
+    ctx.body = todos.find(p => parseInt(ctx.params.id) === p.id);
 });
 
-router.post("/api/todos/:id/:name", (ctx, next) => {
-    products.push(
+router.post("/api/todos", (ctx, next) => {
+    todos.push(
         {
-            id: parseInt(ctx.params.id),
-            name: ctx.params.name
+            id: todos.length+1,
+            name: ctx.request.body.name
         });
 
     ctx.response.status = 201;
-})
+});
 
-router.put("/api/todos/:id/:name", (ctx, next) => {
-    let product = products.find(p => parseInt(ctx.params.id) === p.id);
-    product.name = ctx.params.name;
+router.put("/api/todos/:id", (ctx, next) => {
+    let product = todos.find(p => parseInt(ctx.params.id) === p.id);
+    product.name = ctx.request.body.name;
 
     ctx.response.status = 200;
 });
 
 router.delete("/api/todos/:id", (ctx, next) => {
-    let productIndex = products.findIndex(p => parseInt(ctx.params.id) === p.id);
-    products.splice(productIndex, 1);
+    let productIndex = todos.findIndex(p => parseInt(ctx.params.id) === p.id);
+    todos.splice(productIndex, 1);
 
     ctx.response.status = 200;
 });
