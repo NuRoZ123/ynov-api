@@ -1,0 +1,9 @@
+{
+  "name": "fr.nuroz.api",
+  "version": "1.0.0",
+  "description": "ynov api work",
+  "main": "index.js",
+  "repository": "https://github.com/NuRoZ123/ynov-api.git",
+  "author": "NuRoZ",
+  "license": "MIT"
+}
