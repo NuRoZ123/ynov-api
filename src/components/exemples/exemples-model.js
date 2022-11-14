@@ -17,6 +17,14 @@ const exemplesSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    createAt: {
+        type: Date,
+        required: true
+    },
+    updateAt: {
+        type: Date,
+        required: true
     }
 });
 

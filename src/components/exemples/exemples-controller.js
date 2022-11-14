@@ -29,7 +29,11 @@ export async function create(ctx) {
         const { error } = exempleValidationSchema.validate(ctx.request.body);
         if(error) throw new Error(error);
 
-        await exemplesModel.create(ctx.request.body);
+        let exempleObj = ctx.request.body;
+        exempleObj.createAt = Date.now();
+        exempleObj.updateAt = Date.now();
+
+        await exemplesModel.create(exempleObj);
         ctx.response.status = 201;
     } catch (e) {
         ctx.badRequest({message: e.message})
@@ -48,7 +52,11 @@ export async function edit(ctx) {
         const { error } = exempleValidationSchema.validate(ctx.request.body);
         if(error) throw new Error(error);
 
-        await exemplesModel.updateOne({_id: ctx.params.id}, {$set: ctx.request.body});
+
+        let exempleObj = ctx.request.body;
+        exempleObj.updateAt = Date.now();
+
+        await exemplesModel.updateOne({_id: ctx.params.id}, {$set: exempleObj});
         ctx.response.status = 200;
     } catch (e) {
         ctx.badRequest({message: e.message})
