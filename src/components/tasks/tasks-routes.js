@@ -1,23 +1,25 @@
 import Router from "@koa/router";
 import * as tasksCtrl from "#components/tasks/tasks-controller.js"
-import {isAuthentificatedWithUser} from "../../middlewares/jwt-handler.js";
+import {isAuhtentificated, isAuthentificatedWithUser} from "../../middlewares/jwt-handler.js";
 
 const tasksRouter = new Router();
 
-tasksRouter.get("/", tasksCtrl.getAll);
+// tasksRouter.use(["/", "/:id"], isAuhtentificated);
 
-tasksRouter.get("/protected", isAuthentificatedWithUser,(ctx) => {
-    ctx.ok({message:"this route is protected", user: ctx.state.user})
-});
+tasksRouter.get("/", isAuhtentificated, tasksCtrl.getAll);
 
-tasksRouter.get("/:id", tasksCtrl.getOne);
+// tasksRouter.get("/protected", isAuthentificatedWithUser,(ctx) => {
+//     ctx.ok({message:"this route is protected", user: ctx.state.user})
+// });
 
-tasksRouter.get('/lists/:listId', tasksCtrl.getAllByListId)
+tasksRouter.get("/:id", isAuhtentificated, tasksCtrl.getOne);
 
-tasksRouter.post("/", tasksCtrl.create);
+tasksRouter.get('/lists/:listId', isAuhtentificated, tasksCtrl.getAllByListId)
 
-tasksRouter.put("/:id", tasksCtrl.edit);
+tasksRouter.post("/", isAuhtentificated, tasksCtrl.create);
 
-tasksRouter.delete("/:id", tasksCtrl.remove);
+tasksRouter.put("/:id", isAuhtentificated, tasksCtrl.edit);
+
+tasksRouter.delete("/:id", isAuhtentificated, tasksCtrl.remove);
 
 export default tasksRouter;

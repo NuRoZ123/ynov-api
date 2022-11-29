@@ -17,6 +17,12 @@ const tasksSchema = new Schema({
     },
     done: {
         type: Boolean,
+        required: true,
+        default: false
+    },
+    createBy: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
         required: true
     }
 }, {

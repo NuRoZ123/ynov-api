@@ -1,16 +1,17 @@
 import Router from "@koa/router";
 import * as listeCtrl from "#components/list/listes-controller.js"
+import {isAuhtentificated} from "#middlewares/jwt-handler.js";
 
 const listesRouter = new Router();
 
-listesRouter.get("/", listeCtrl.getAll);
+listesRouter.get("/", isAuhtentificated, listeCtrl.getAll);
 
-listesRouter.get("/:id", listeCtrl.getOne);
+listesRouter.get("/:id", isAuhtentificated, listeCtrl.getOne);
 
-listesRouter.post("/", listeCtrl.create);
+listesRouter.post("/", isAuhtentificated, listeCtrl.create);
 
-listesRouter.put("/:id", listeCtrl.edit);
+listesRouter.put("/:id", isAuhtentificated, listeCtrl.edit);
 
-listesRouter.delete("/:id", listeCtrl.remove);
+listesRouter.delete("/:id", isAuhtentificated, listeCtrl.remove);
 
 export default listesRouter;
