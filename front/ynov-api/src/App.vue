@@ -1,26 +1,28 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <login-component v-if="page === 'login'" @changePage="changePage"/>
+  <register-component v-else-if="page === 'register'"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LoginComponent from './components/LoginComponent.vue'
+import RegisterComponent from './components/RegisterComponent.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    LoginComponent,
+    RegisterComponent
+  },
+  data: () => ({
+    page: "login"
+  }),
+  methods: {
+    changePage(value) {
+      this.page = value
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
