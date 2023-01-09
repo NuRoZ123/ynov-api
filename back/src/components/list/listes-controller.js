@@ -82,7 +82,7 @@ export async function remove(ctx) {
         }
 
         await listeModel.findOneAndRemove({_id: ctx.params.id});
-        await tasksModel.deleteMany()
+        await tasksModel.deleteMany({list: ctx.params.id});
         ctx.response.status = 200;
     } catch (e) {
         ctx.badRequest({message: e.message})

@@ -1,0 +1,61 @@
+<template>
+  <div>
+    <span>{{error}}</span>
+    <div v-if="!isEditing">
+      <span>votre email: {{this.profile.email}}</span><br/>
+      <span>le comptes est: {{this.profile.settings.is_email_validated ? "validé" : "non validé"}}</span><br/>
+      <span>crée le: {{this.profile.createdAt}}</span><br/>
+      <button v-on:click="setEditing(true)">Modifier</button>
+    </div>
+
+    <div v-if="isEditing">
+      <input v-model="this.edited.email" placeholder="nouveau email"><br/>
+      <input v-model="this.edited.password" placeholder="nouveau password"><br/>
+      <button v-on:click="editProfile">Confirmé</button>
+      <button v-on:click="setEditing(false)">Annuler</button>
+    </div>
+  </div>
+</template>
+
+<script>
+import {ServiceUtilisateur} from "../../public/js/service/ServiceUtilisateur";
+
+export default {
+  name: "ProfileComponent",
+  data: () => ({
+    profile: {settings: {is_email_validated: false}},
+    error: "",
+    isEditing: false,
+    edited: {email: "", password: ""}
+  }),
+  methods: {
+    setEditing(value) {
+      this.isEditing = value;
+    },
+    setProfile() {
+      ServiceUtilisateur.getInfo()
+      .then(async (response) => {
+        if(response.status === 200) {
+          this.profile = await response.json();
+        } else {
+          this.error = response.body;
+        }
+      });
+    },
+    editProfile() {
+      ServiceUtilisateur.updateInfo(this.edited.email, this.edited.password)
+      .then(async (response) => {
+        if(response.status === 200) {
+          this.setProfile();
+          this.setEditing(false);
+        } else {
+          this.error = await response.json();
+        }
+      });
+    }
+  },
+  mounted() {
+    this.setProfile();
+  }
+}
+</script>
