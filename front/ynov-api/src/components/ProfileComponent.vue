@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <span>{{error}}</span>
+  <div class="profile">
+    <span class="error">{{error}}</span>
     <div v-if="!isEditing">
       <span>votre email: {{this.profile.email}}</span><br/>
       <span>le comptes est: {{this.profile.settings.is_email_validated ? "validé" : "non validé"}}</span><br/>
@@ -10,7 +10,7 @@
 
     <div v-if="isEditing">
       <input v-model="this.edited.email" placeholder="nouveau email"><br/>
-      <input v-model="this.edited.password" placeholder="nouveau password"><br/>
+      <input v-model="this.edited.password" placeholder="nouveau password" type="password"><br/>
       <button v-on:click="editProfile">Confirmé</button>
       <button v-on:click="setEditing(false)">Annuler</button>
     </div>
@@ -59,3 +59,44 @@ export default {
   }
 }
 </script>
+
+<style>
+.profile {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.profile span {
+  font-size: 16px;
+  color: #333;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.profile input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.profile button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.profile button:hover {
+  background-color: #3e8e41;
+}
+</style>

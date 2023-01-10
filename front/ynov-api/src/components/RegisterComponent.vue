@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="register">
     <input v-model="email" placeholder="email" type="email">
     <input v-model="password" placeholder="password" type="password">
     <label>terms and conddition:<input v-model="termsAndCondition" type="checkbox"></label>
@@ -45,6 +45,39 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
 
+.register input[type="email"], .register input[type="password"] {
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.register label {
+  margin: 10px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.register button {
+  margin: 10px 0;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
 </style>

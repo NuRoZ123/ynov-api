@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <p v-if="!isEdit">titre: {{task.title}}</p>
-    <p v-if="!isEdit">description: {{task.description}}</p>
-    <input placeholder="title" v-model="this.title" v-if="isEdit"/>
-    <input placeholder="description" v-model="this.description" v-if="isEdit"/><br v-if="isEdit"/>
-    <label v-if="isEdit">est fini: <input placeholder="etat" v-model="this.isDone" type="checkbox"/></label>
+  <div class="task-component">
+    <p v-if="!isEdit">Titre: {{task.title}}</p>
+    <p v-if="!isEdit">Description: {{task.description}}</p>
+    <p v-if="!isEdit">Etat: {{task.done ? "Fini" : "Non fini"}}</p>
+    <input placeholder="Titre" v-model="title" v-if="isEdit" />
+    <input placeholder="Description" v-model="description" v-if="isEdit" />
+    <label v-if="isEdit">Est fini: <input placeholder="Etat" v-model="isDone" type="checkbox"/></label>
     <div class="task-icon">
-      <p v-if="!isEdit">etat: {{task.done ? "fini" : "non fini"}}</p>
-      <button v-on:click="setEditable(true)" v-if="!isEdit">edit</button>
-      <button v-on:click="deleteTask(task._id)" v-if="!isEdit">delete</button>
-      <button v-on:click="editTask()" v-if="isEdit">sauvegardé</button>
-      <button v-on:click="setEditable(false)" v-if="isEdit">cancel</button>
+      <button v-on:click="setEditable(true)" v-if="!isEdit">Modifier</button>
+      <button v-on:click="deleteTask(task._id)" v-if="!isEdit">Supprimer</button>
+      <button v-on:click="editTask()" v-if="isEdit">Sauvegarder</button>
+      <button v-on:click="setEditable(false)" v-if="isEdit">Annuler</button>
     </div>
   </div>
 </template>
@@ -73,3 +73,55 @@ export default {
   }
 }
 </script>
+
+<style>
+.task-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+}
+
+.task-component p {
+  margin: 10px 0;
+}
+
+.task-component input {
+  width: 80%;
+  border: 1px solid #ccc;
+}
+
+.task-component label{
+  width: 80%;
+}
+
+.task-component input[type="checkbox"] {
+  width: 20%;
+}
+
+.task-component .task-icon {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.task-component button {
+  background-color: #4CAF50;
+  width: 40%;
+  margin-left: 5%;
+  margin-right: 5%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 0.7em;
+  color: white;
+  border: none;
+}
+
+.task-component button:hover {
+  background-color: #3e8e41;
+}
+</style>

@@ -6,8 +6,8 @@
     </div>
 
     <div class="list-child">
-      <input placeholder="titre de la liste" v-model="title"/>
-      <button v-on:click="this.createList()">crée liste</button>
+      <input placeholder="Titre de la liste" v-model="title"/>
+      <button v-on:click="this.createList()">Crée liste</button>
     </div>
   </div>
 </template>
@@ -77,9 +77,41 @@ export default {
 </script>
 
 <style>
-.list-child{
-  background-color: lightgray;
-  padding-bottom: 10px;
-  border-radius: 10px;
+.list-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  width: 80%;
+  margin-left: 10%;
 }
+
+.list-child input {
+  padding: 10px;
+  width: 80%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+.list-child button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.list-child button:hover {
+  background-color: #3e8e41;
+}
+
+.task-child input {
+  padding: 10px;
+  width: 80%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
 </style>

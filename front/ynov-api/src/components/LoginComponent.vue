@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="login">
     <input v-model="email" placeholder="email" type="email">
     <input v-model="password" placeholder="password" type="password">
     <button v-on:click="loginBtnClick">login</button>
-    <span>{{error}}</span>
+    <span class="error">{{error}}</span>
     <button v-on:click="goToRegister">S'inscrire</button>
   </div>
 </template>
@@ -42,3 +42,42 @@ export default {
   }
 }
 </script>
+
+<style>
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+.login input {
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.login button {
+  margin: 10px 0;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.login button:hover {
+  background-color: #3e8e41;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+</style>

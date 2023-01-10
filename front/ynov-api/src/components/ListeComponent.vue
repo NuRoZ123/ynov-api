@@ -1,28 +1,26 @@
 <template>
-  <div>
-    <div class="horizontale">
+  <div class="liste-component">
+    <div class="horizontale size80">
       <h2 v-if="!isEdit">{{liste.title}}</h2>
-      <input v-if="isEdit" v-model="title" placeholder="titre de la liste">
+      <input v-if="isEdit" v-model="title" placeholder="Titre de la liste">
       <div class="horizontale">
-        <button v-if="!isEdit" v-on:click="setEditing(true)">modifier</button>
-        <button v-if="!isEdit" v-on:click="deleteList(liste._id)">supprimer</button>
+        <button v-if="!isEdit" v-on:click="setEditing(true)">Modifier</button>
+        <button v-if="!isEdit" v-on:click="deleteList(liste._id)">Supprimer</button>
         <button v-if="isEdit" v-on:click="updateList(liste._id)">Modifier</button>
-        <button v-if="isEdit" v-on:click="setEditing(false)">cancel</button>
+        <button v-if="isEdit" v-on:click="setEditing(false)">Annuler</button>
       </div>
     </div>
     <p>Créée le: {{liste.createdAt}}</p>
     <p>Modifiée le: {{liste.updatedAt}}</p>
-  </div>
-
-  <div class="tasks-container">
-    <div v-for="task in tasks.filter(aTask => aTask.list === liste._id)" :key="task._id" class="task-child">
-      <TaskComponent :task="task" :tasks="tasks" @setTasks="setTasks"></TaskComponent>
-    </div>
-
-    <div class="task-child">
-      <input placeholder="titre" v-model="this.newTaskTitle" />
-      <input placeholder="description" v-model="this.newTaskDescription"/>
-      <button v-on:click="createTask(liste._id)">Ajouté</button>
+    <div class="tasks-container">
+      <div v-for="task in tasks.filter(aTask => aTask.list === liste._id)" :key="task._id" class="task-child">
+        <TaskComponent :task="task" :tasks="tasks" @setTasks="setTasks"></TaskComponent>
+      </div>
+      <div class="task-child create">
+        <input placeholder="Titre" v-model="this.newTaskTitle" />
+        <input placeholder="Description" v-model="this.newTaskDescription"/>
+        <button v-on:click="createTask(liste._id)">Ajout</button>
+      </div>
     </div>
   </div>
 </template>
@@ -101,36 +99,77 @@ export default {
 </script>
 
 <style>
-.horizontale {
+.size80 {
+  width: 80%;
+}
+
+.liste-component {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
+  width: 80%;
+}
+
+.liste-component h2 {
+  margin: 10px 0;
+}
+
+.liste-component input {
+  padding: 10px;
+  width: 80%;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+}
+
+.liste-component .horizontale {
+  display: flex;
   justify-content: space-between;
 }
 
-.horizontale button {
-  height: 20px;
+.liste-component button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.liste-component button:hover {
+  background-color: #3e8e41;
+}
+
+.liste-component p {
+  margin: 10px 0;
+}
+
+.horizontale {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .tasks-container {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   flex-wrap: wrap;
-  justify-content: space-around;
-  background-color: gray;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  width: auto;
-  margin-left: 50px;
-  margin-right: 50px;
-  border-radius: 10px;
+  justify-content: center;
+  width: 100%;
 }
 
 .task-child {
+  width: auto;
   max-width: 20%;
-  background-color: yellow;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 10px;
-  margin: 10px 0;
 }
+
+.create {
+  border: solid 1px #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
 </style>
